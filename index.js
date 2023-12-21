@@ -41,7 +41,7 @@ async function run() {
     app.post('/api/tasks', async (req, res) => {
       try {
         const result = await tasksCollection.insertOne(req.body);
-        res.json(result.ops[0]);
+        res.send(result);
       } catch (err) {
         res.status(500).json({ error: err.message });
       }
@@ -95,7 +95,7 @@ async function run() {
         if (!result.value) {
           return res.status(404).json({ message: 'Task not found' });
         }
-        res.json({ message: 'Task deleted successfully' });
+        res.send(result);
       } catch (err) {
         res.status(500).json({ error: err.message });
       }
